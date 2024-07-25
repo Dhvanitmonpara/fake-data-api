@@ -1,0 +1,20 @@
+{
+  "name": "fake-data-api",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000f\u0000a\u0000k\u0000e\u0000-\u0000d\u0000a\u0000t\u0000a\u0000-\u0000a\u0000p\u0000i\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
