@@ -1,4 +1,3 @@
-import faker from 'faker'; // Or another library for generating fake data
 import express from 'express';
 import { app } from "./app.js"
 import connectDB from "./db/index.js"

@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "��#\u0000 \u0000f\u0000a\u0000k\u0000e\u0000-\u0000d\u0000a\u0000t\u0000a\u0000-\u0000a\u0000p\u0000i\u0000\r\u0000 \u0000",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@google/generative-ai": "^0.16.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
