@@ -5,8 +5,6 @@ const app = express()
 import { asyncHandler } from './utils/asyncHandler.js';
 import { ApiResponse } from './utils/apiResponse.js';
 
-import run from './gemini/gemini.js';
-
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
@@ -16,10 +14,25 @@ app.use(cors({
 
 // schema imports
 import { User } from './models/user.model.js';
+import connectDB from './db/index.js';
 
 app.get("/", (req, res) => {
     res.send("Welcome to the Fake Data API!")
 })
+
+app.get('/db/connect', asyncHandler(async (req, res) => {
+    const dbUri = process.env.MONGODB_URI || req.body.dbUri;
+    if (!dbUri) {
+        return res.status(400).json(ApiResponse.error('Invalid database URI'));
+    }
+
+    try {
+        await connectDB()
+        res.status(200).json(new ApiResponse(200, 'MongoDB connected successfully'));
+    } catch (error) {
+        console.log("MongoDB connection error: ", error)
+    }
+}))
 
 app.get('/schema/insert', asyncHandler(async (req, res) => {
 
@@ -44,40 +57,7 @@ app.get('/schema/insert', asyncHandler(async (req, res) => {
 
     // console.log(randomLists);
 
-    const schemaArray = {
-        username: {
-            type: String,
-            required: true,
-            unique: true,
-            lowercase: true,
-            trim: true,
-            index: true
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            lowercase: true,
-            trim: true,
-            index: true
-        },
-        fullName: {
-            type: String,
-            required: true,
-            trim: true,
-        },
-        password: {
-            type: String,
-            required: [true, "Password is required"]
-        },
-        avatarImage: {
-            type: String,
-            default: ""
-        },
-        refreshToken: {
-            type: String
-        }
-    }
+    const schemaArray = req.body?.schema
 
     let dataArray = []
 
